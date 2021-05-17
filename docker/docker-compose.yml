@@ -12,7 +12,7 @@ services:
       memlock: -1
       stack: 67108864
     volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - /home/hanoona:/tmp/.X11-unix:ro
     environment:
       - DISPLAY=$DISPLAY
       - NVIDIA_VISIBLE_DEVICES=all
