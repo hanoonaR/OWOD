@@ -55,7 +55,19 @@ Kindly run `replicate.sh` to replicate results from the models shared on the Goo
 
 Kindly check `run.sh` file for a task workflow.
 
+## Replicating Results
+The [dockerfile](Dockerfile) allows you to run the detectron2 to execute the scripts.
+Before running the scripts,
+1. Download the dataset (Annotations and JPEGImages) from the above google drive link and extract them to [datasets/VOC2007]() folder.
+   
+2. To replicate results with pretrained models provided, download the pretrained models from owod_backup from the provided [[Google Drive Link]](https://drive.google.com/drive/folders/1Sr4_q0_m2f2SefoebB25Ix3N1VIAua0w?usp=sharing)
+   , create a dir 'workspace/output' and add the corresponding pretrained models of task1 to task4 in files t1_ft to t4_ft.
+    
+3. Build the [dockerfile](Dockerfile) using the command `docker build -t your_directory:owod` .
 
+4. To replicate results with pretrained models provided, use the [modified replicate script](scripts/test.sh) using the command `./scripts/run_docker.sh scripts/test.sh`.
+
+5. To retrain the model, use the [modified run script](scripts/train.sh) using the command `./scripts/run_docker.sh scripts/train.sh`.
 ## Acknowledgement
 
 Our code base is build on top of [Detectron 2](https://github.com/facebookresearch/detectron2) library. 

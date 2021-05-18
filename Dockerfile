@@ -25,8 +25,7 @@ RUN pip install tensorboard
 RUN pip install torch==1.6 torchvision==0.7 -f https://download.pytorch.org/whl/cu101/torch_stable.html
 
 RUN pip install 'git+https://github.com/facebookresearch/fvcore'
-# install detectron2
-COPY . detectron2_repo
+
 # set FORCE_CUDA because during `docker build` cuda is not accessible
 ENV FORCE_CUDA="1"
 # This will by default build detectron2 for all common cuda architectures and take a lot more time,
@@ -34,9 +33,12 @@ ENV FORCE_CUDA="1"
 ARG TORCH_CUDA_ARCH_LIST="Kepler;Kepler+Tesla;Maxwell;Maxwell+Tegra;Pascal;Volta;Turing"
 ENV TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH_LIST}"
 
+# install detectron2 and requirements
+COPY . detectron2_repo
 RUN pip install -e detectron2_repo
 COPY requirement.txt requirement.txt
 RUN pip install -r requirement.txt
+
 # Set a fixed model cache directory.
 ENV FVCORE_CACHE="/tmp"
 WORKDIR /home/appuser/detectron2_repo
